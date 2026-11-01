@@ -129,15 +129,15 @@ def runquic(n , filename,flowControlSize, logg, loss):
     info( "*** Ping all hosts***\n" )
     net.pingAll()
 
-    h = net.get( 'h1')
-    h.cmd("cd /home/mininet/UDP-PING/; python3 -u udppingclient.py 10.0.0."+str(n+1)+" > PingPEPspace_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+"_"+str(1)+".log &")
-    print("cd /home/mininet/UDP-PING/; python3 -u udppingclient.py 10.0.0."+str(n+1)+" > PingPEPspace_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+"_"+str(1)+".log &")
+    # h = net.get( 'h1')
+    # h.cmd("cd /home/mininet/UDP-PING/; python3 -u udppingclient.py 10.0.0."+str(n+1)+" > PingPEPspace_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+"_"+str(1)+".log &")
+    # print("cd /home/mininet/UDP-PING/; python3 -u udppingclient.py 10.0.0."+str(n+1)+" > PingPEPspace_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+"_"+str(1)+".log &")
 
-    h = net.get( 'h'+str(1+n))    
-    h.cmd("cd /home/mininet/UDP-PING/; python3 udppingserver.py --host 10.0.0."+str(n+1)+" &")
-    print("cd /home/mininet/UDP-PING/; python3 udppingserver.py --host 10.0.0."+str(n+1)+" &")
+    # h = net.get( 'h'+str(1+n))    
+    # h.cmd("cd /home/mininet/UDP-PING/; python3 udppingserver.py --host 10.0.0."+str(n+1)+" &")
+    # print("cd /home/mininet/UDP-PING/; python3 udppingserver.py --host 10.0.0."+str(n+1)+" &")
 
-    # CLI(net)
+    CLI(net)
     h = net.get('nodeA')
     h.cmd("cd /home/mininet/go/src/PEPSpace/;./PEP -localaddr 10.0.0."+str(n+n+1)+":4242 -remoteaddr 10.0.0."+str(n+n+2)+":4242 -TCPaddr 10.0.0."+str(n+n+1)+":4243 -QUICaddr 10.0.0."+str(n+n+1)+":4244 -perspective 1 -fcs "+str(flowControlSize)+" > date/PEP1_QUIC_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+logg+".log &")
     print("cd /home/mininet/go/src/PEPSpace/;./PEP -localaddr 10.0.0."+str(n+n+1)+":4242 -remoteaddr 10.0.0."+str(n+n+2)+":4242 -TCPaddr 10.0.0."+str(n+n+1)+":4243 -QUICaddr 10.0.0."+str(n+n+1)+":4244 -perspective 1 -fcs "+str(flowControlSize)+" > date/PEP1_QUIC_"+str(God_loss)+"_FN_"+filename+"_N_"+str(n)+logg+".log &")
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
 
     flowControlSize = 50
-    runquic(10,'35',flowControlSize,"_"+str(1),1)
+    runquic(1,'35',flowControlSize,"_"+str(1),1)
 
     # for i in range(1,11):
     #     n=i

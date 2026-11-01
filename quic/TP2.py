@@ -6,9 +6,9 @@ fig1, ax = plt.subplots()
 goodputs_for_n = []
 receive_times_buf = []
 receive_bytes_buf = []
-n=10
+n=1
 for i in range(1, n + 1):
-    filename = "/home/mininet/go/src/PEPSpace/date/c_QUIC_1_FW_50_FN_35_N_"+str(n)+"_"+str(i)+"_"+str(1)+".log"
+    filename = "/home/mininet/go/src/PEPSpace/date/c_QUIC_0.1_FW_50_FN_35_N_"+str(n)+"_"+str(i)+"_"+str(8)+".log"
     # read and collect until we hit 35 000 000 bytes
     times = []
     bytes_read = []

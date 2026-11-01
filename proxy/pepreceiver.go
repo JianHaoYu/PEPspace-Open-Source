@@ -64,14 +64,14 @@ func OpenNewQUICConn(addr string, PEPstream quicspace.Stream) {
 	config := &quic.Config{
 		// HandshakeIdleTimeout:           100000000000,
 		// MaxIdleTimeout:                 300000000000,
-		// InitialStreamReceiveWindow:     30 * (1 << 10),
-		// MaxStreamReceiveWindow:         30 * (1 << 10),
-		// InitialConnectionReceiveWindow: 30 * (1 << 10) * 2,
-		// MaxConnectionReceiveWindow:     30 * (1 << 10) * 2,
-		InitialStreamReceiveWindow:     3000,
-		MaxStreamReceiveWindow:         3000,
-		InitialConnectionReceiveWindow: 3000 * 7,
-		MaxConnectionReceiveWindow:     3000 * 7,
+		InitialStreamReceiveWindow:     30 * (1 << 10),
+		MaxStreamReceiveWindow:         30 * (1 << 10),
+		InitialConnectionReceiveWindow: 30 * (1 << 10) * 2,
+		MaxConnectionReceiveWindow:     30 * (1 << 10) * 2,
+		// InitialStreamReceiveWindow:     3000,
+		// MaxStreamReceiveWindow:         3000,
+		// InitialConnectionReceiveWindow: 3000 * 7,
+		// MaxConnectionReceiveWindow:     3000 * 7,
 	}
 	OutPutConn, err := quic.DialAddr(context.Background(), addr, tlsConf, config)
 	if err != nil {
