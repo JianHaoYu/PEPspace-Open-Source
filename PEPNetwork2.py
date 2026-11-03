@@ -100,7 +100,7 @@ if __name__ == '__main__':
     flowControlSize = 50
 
     n=1
-    for j in range(1,10):
+    for j in range(0,1):
         run(0,'35',flowControlSize,"_"+str(j))
     # n=2
     # run(0,'35',flowControlSize)

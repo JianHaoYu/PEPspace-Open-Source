@@ -73,13 +73,13 @@ class MyTopo( Topo ):
         Switch1 = self.addSwitch('s1')
         Switch2 = self.addSwitch('s2')
         h = self.addHost( 'h1')
-        self.addLink( h, Switch1, bw=10, delay='5ms', max_queue_size=50000)
+        self.addLink( h, Switch1, bw=100, delay='5ms', max_queue_size=50000)
 
         h = self.addHost( 'h2')
-        self.addLink( h, Switch2, bw=10, delay='5ms', max_queue_size=50000)
+        self.addLink( h, Switch2, bw=100, delay='5ms', max_queue_size=50000)
 
-        self.addLink( PEPnode1, Switch1, bw=10, delay='5ms', max_queue_size=50000)
-        self.addLink( Switch2, PEPnode2, bw=10, delay='5ms', max_queue_size=50000)
+        self.addLink( PEPnode1, Switch1, bw=100, delay='5ms', max_queue_size=50000)
+        self.addLink( Switch2, PEPnode2, bw=100, delay='5ms', max_queue_size=50000)
         self.addLink( Switch1, Switch2, bw=10, delay='1990ms', max_queue_size=50000)            
 
 
@@ -179,9 +179,24 @@ def run(i , filename, flowControlSize, logg):
 if __name__ == '__main__':
     setLogLevel( 'info' )
 
+    # # G-E参数1：GE-Original，对应现有 PEPesc 设置
+    LossType = "G_E_Type_PEPesc"
+    GE_P = 0.017                    # P(B | G)
+    GE_Q = 0.935                    # P(G | B)
+    GE_LOSS_GOOD = 0.0              # 好状态不丢包
+    GE_LOSS_BAD = 0.952             # 坏状态丢包概率 95.2%
+
     flowControlSize = 50
-    for i in range(10,50):
+    for i in range(19,50):
         run(0,'200',flowControlSize,"_"+str(i))
 
+    # G-E参数2：GE-Longer-Burst，增强时间相关性
+    LossType = "G_E_Type_PEPesc_Longer_Burst"
+    GE_P = 0.00182                  # P(B | G)，由平均 PER=0.017、GE_Q=0.1 反算
+    GE_Q = 0.1                      # P(G | B) = 1 / 平均坏状态长度
+    GE_LOSS_GOOD = 0.0              # 好状态不丢包
+    GE_LOSS_BAD = 0.952             # 坏状态丢包概率 95.2%
 
-
+    flowControlSize = 50
+    for i in range(1,50):
+        run(0,'200',flowControlSize,"_"+str(i))

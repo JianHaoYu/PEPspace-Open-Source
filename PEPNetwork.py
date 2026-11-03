@@ -98,8 +98,8 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
 
     flowControlSize = 50
-    n=7
-    for j in range(2,10):
+    n=1
+    for j in range(0,1):
         run(0,'35',flowControlSize,"_"+str(j))
     # for i in range(6,11):
     #     n=i
